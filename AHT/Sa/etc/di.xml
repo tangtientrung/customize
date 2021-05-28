@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sale_index_listing_data_source" xsi:type="string">AHT\Sa\Ui\Grid\Sale</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider">
+        <arguments>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="fulltext" xsi:type="object">Magento\CatalogSearch\Ui\DataProvider\Product\AddFulltextFilterToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sale_index_listing_data_source" xsi:type="string">AHT\Sa\Model\ResourceModel\Sa\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="AHT\Sa\Model\ResourceModel\Sa\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sa</argument>
+            <argument name="resourceModel" xsi:type="string">AHT\Sa\Model\ResourceModel\Sa</argument>
+        </arguments>
+    </virtualType> -->
+</config>

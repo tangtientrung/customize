@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var \AHT\Sa\Block\Frontend\Commisstion $block */
+?>
+<?php $sa = $block->getAll(); ?>
+<?= $block->getChildHtml('info') ?>
+<?php if ($sa && count($sa)) : ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Commistion')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th scope="col" class="col date"><?= $block->escapeHtml(__('Product Sku')) ?></th>
+                    <th scope="col" class="col shipping"><?= $block->escapeHtml(__('View Product')) ?></th>
+                    <th scope="col" class="col status"><?= $block->escapeHtml(__('Commission Type')) ?></th>
+                    <th scope="col" class="col actions"><?= $block->escapeHtml(__('Commission Value')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($sa as $sa => $_val) : ?>
+                    <?php if($block->getUserId() == $_val->getSaleAgentId()) {?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Order #')) ?>" class="col id"><?= $block->getProduct($_val->getId())->getName() ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= $block->getProductSku($_val->getId()) ?></td>
+                        
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
+                            <a href="<?= $this->getUrl($block->getProductUrl($_val->getId()).".html")?>" >
+                                <span><?= $block->escapeHtml(__('View Product')) ?></span>
+                            </a>
+                
+                        </td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Ship To')) ?>" class="col shipping"><?= $block->getCommissionTypeText($_val->getId()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Status')) ?>" class="col status"><?= ($block->getCommissionTypeText($_val->getId()) == "Fixed") ? $_val->getCommissionValue().' $' : $_val->getCommissionValue().' %';  ?></td>
+                    </tr>
+                    <?php } ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else : ?>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('You have no commission.')) ?></span></div>
+<?php endif ?>

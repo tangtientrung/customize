@@ -1,0 +1,19 @@
+{
+    "sa": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "order_item_id": true,
+            "order_item_sku": true,
+            "order_item_price": true,
+            "commission_type": true,
+            "commission_value": true
+        },
+        "index": {
+            "SA_ORDER_ITEM_SKU": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">sale_index_listing.sale_index_listing_data_source</item>
+            <item name="deps" xsi:type="string">sale_index_listing.sale_index_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">sale_index_columns</item>
+        
+    </argument>
+    
+
+    <dataSource name="sale_index_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">sale_index_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">true</item>
+            </item>
+            
+        </argument>
+        <bookmark name="bookmarks"/>
+        
+        <filterSearch name="fulltext"/>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+       
+    </listingToolbar>
+    
+    <!-- columns -->
+    <columns name="sale_index_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">sale_index_listing.sale_index_listing.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+            </item>
+        </argument>
+
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <!-- Column id -->
+        <!-- <column name="entity_id" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column> -->
+
+        <!-- Column product -->
+        <column name="value"  sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sa</item>
+                    <item name="dataScope" xsi:type="string">value</item>
+                    <item name="label" xsi:type="string" translate="true">Product</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <!-- Column sku -->
+        <column name="order_item_sku" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sa</item>
+                    <item name="dataScope" xsi:type="string">order_item_sku</item>
+                    <item name="label" xsi:type="string" translate="true">Sku</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <!-- Column price -->
+        <column name="order_item_price" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sa</item>
+                    <item name="dataScope" xsi:type="string">order_item_price</item>
+                    <item name="label" xsi:type="string" translate="true">Order price</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <!-- Column commistion type -->
+        <column name="commission_type" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sa</item>
+                    <item name="dataScope" xsi:type="string">commission_type</item>
+                    <item name="label" xsi:type="string" translate="true">Commission Type</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <!-- Column commistion value -->
+        <column name="commission_value" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">sa</item>
+                    <item name="dataScope" xsi:type="string">commission_value</item>
+                    <item name="label" xsi:type="string" translate="true">Commission Value</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        
+        
+        
+        
+
+        
+    </columns>
+</listing>
