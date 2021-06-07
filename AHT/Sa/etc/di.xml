@@ -14,6 +14,12 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Customer\Model\Data\Customer">
+        <plugin name="change-wellcome"
+                type="AHT\Sa\Plugin\CustomerData\Customer"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
     <!-- <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

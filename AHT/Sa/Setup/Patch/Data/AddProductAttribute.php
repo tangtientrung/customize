@@ -47,9 +47,10 @@
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
         $eavSetup->addAttribute('catalog_product', 'sale_agent_id', [
-            'type' => 'int',
+            'type' => 'text',
             'label' => 'Sale agent id',
-            'input' => 'text',
+            'input' => 'select',
+            'source' =>'AHT\Sa\Model\Source\SaleAgent',
             'global' => ScopedAttributeInterface::SCOPE_STORE,
             'visible' => true,
             'used_in_product_listing' => true,
