@@ -6,4 +6,4 @@
 
 use \Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'AHT_Checkou', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'AHT_Checkout', __DIR__);
