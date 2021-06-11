@@ -47,7 +47,7 @@ class DeliverySave extends \Magento\Backend\App\Action
         $id = $this->getRequest()->getParam('id');
         $order = $this->_orderFactory->create()->load($id);
         $order->setDeliveryDate($this->getRequest()->getParam('date'));
-        $order->setDeliveryComment($this->getRequest()->getParam('comment'));
+        // $order->setDeliveryComment($this->getRequest()->getParam('comment'));
         $order->save();
         $this->messageManager->addSuccessMessage(__('You updated the order delivery.'));
         return $resultRedirect->setPath('sales/*/view', ['order_id' => $id]);
