@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="table_name" resource="default" engine="innodb">
+        <column xsi:type="decimal" name="payment_fee" nullable="true" scale="4" precision="12" default="0.0000" comment="Payment fee"/>
+        <column xsi:type="decimal" name="base_payment_fee" nullable="true" scale="4" precision="12" default="0.0000" comment="Base Payment Fee"/>
+    </table>
+</schema>
