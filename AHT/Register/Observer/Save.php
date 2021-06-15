@@ -30,7 +30,7 @@ class Save implements \Magento\Framework\Event\ObserverInterface
 
         $customer->setCustomAttribute('contact_phone', $contact_phone);
         $customer->setCustomAttribute('company_type', $company_type);
-        if($company_type == 5645)
+        if($company_type == 4)
         {
             $organization_name = $request->getPost('organization_name');
             $customer->setCustomAttribute('organization_name', $organization_name);
