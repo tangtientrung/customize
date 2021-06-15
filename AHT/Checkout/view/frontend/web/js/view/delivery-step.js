@@ -83,13 +83,14 @@ define(
                 var date = $("input[name=date]").val();
                 var comment = $("input[name=comment]").val();
 
-                // var quoteId = quote.getQuoteId();
+                var quoteId = quote.getQuoteId();
                 // var isCustomer = customer.isLoggedIn();
-                var url = urlBuilder.build('delivery/index/savesession');
-                // alert(isCustomer);
+                var url = urlBuilder.build('delivery/index/savequote');
+                // var url = urlBuilder.build('delivery/index/savesession');
                 storage.post(
                     url,
-                    JSON.stringify({ date: date, comment: comment }),
+                    JSON.stringify({ quoteId:quoteId, date: date, comment: comment }),
+                    // JSON.stringify({date: date, comment: comment }),
                     false
                 ).done(
                     function (respone) {
