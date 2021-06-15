@@ -14,14 +14,18 @@ class Customer
 
     public function afterGetFirstname(\Magento\Customer\Model\Data\Customer $subject, $result)
     {
-        if($subject->getCustomAttribute('is_sales_agent')->getValue()==1)
+        if($subject->getCustomAttribute('is_sales_agent'))
         {
-            $exit =strpos($result, 'SA:' );
-            if($exit===false){
-                $result = 'SA: '.$result;
+            if($subject->getCustomAttribute('is_sales_agent')->getValue()==1)
+            {
+                $exit =strpos($result, 'SA:' );
+                if($exit===false){
+                    $result = 'SA: '.$result;
+                }
+                
             }
-            
         }
+        
         
         return $result;
        
