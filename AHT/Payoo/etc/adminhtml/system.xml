@@ -15,7 +15,6 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="model" translate="label" type="hidden" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Model</label>
                 </field>
                 <field id="payment_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Payment url</label>

@@ -9,8 +9,8 @@
     <default>
         <payment>
             <payoo>
-                <active>0</active>
-                <model>AHT\Payoo\Model\Payoo</model>
+                <active>1</active>
+                <model>AHT\Payoo\Model\Payment\Payoo</model>
                 <payment_url></payment_url>
                 <business_username></business_username>
                 <shop_id></shop_id>

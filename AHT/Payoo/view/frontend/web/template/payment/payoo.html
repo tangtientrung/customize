@@ -1,0 +1,13 @@
+<input type="radio" name="payment[method]" data-bind="click:selectPayoo"/>
+<label>Payoo</label>
+<div data-bind="foreach: payoo">
+    <input type="radio"data-bind="attr: { id: name}"/>
+    <label data-bind="text:title,attr: { for: name}"></label>
+    <div data-bind="foreach:icons">
+        <!-- <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind=" checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/> -->
+        <img class="bankcode-img" data-bind="attr: { src: require.toUrl('https://payoo.vn/v2/img/banks-logo-new/'+  code.toLowerCase() +'.png') }">
+    </div>
+</div>
