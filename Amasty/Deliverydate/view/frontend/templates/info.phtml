@@ -1,0 +1,31 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+?>
+<?php /** @var $block \Amasty\Deliverydate\Block\Sales\Order\Info\Deliverydate */ ?>
+<?php /** @var $list array */ ?>
+<?php if (!empty($list)) : ?>
+    <div class="block ">
+        <div class="block-title"><strong><?php /* @noEscape */ echo __('Delivery Date') ?></strong></div>
+        <div class="block-content">
+            <div class="box">
+                <?php foreach ($list as $fieldCode => $field) : ?>
+                <div class="box-content">
+                    <p><?php /* @noEscape */ echo $field['label']; ?>
+                        <?php echo $block->escapeHtml($field['value']); ?>
+                        <?php if ($block->isFieldEditable($fieldCode)) : ?>
+                            <a href="<?php /* @escapeNotVerified */ echo $block->getEditUrl() ?>">
+                                <?php /* @noEscape */ echo __('Edit') ?>
+                            </a>
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+

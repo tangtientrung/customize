@@ -1,0 +1,18 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+<module name="AHT_Wholesale" setup_version="1.0.2"> </module>
+    <sequence>
+        <module name="Magento_Checkout"/>
+    </sequence>
+    <sequence>
+        <module name="Magento_Sales"/>
+    </sequence>
+    <sequence>
+        <module name="Magento_Catalog"/>
+    </sequence>
+    <sequence>
+        <module name="Magento_InventoryReservations"/>
+    </sequence>
+    <sequence>
+        <module name="Magento_CatalogWidget"/>
+    </sequence>
+</config>

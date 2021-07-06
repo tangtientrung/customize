@@ -1,0 +1,40 @@
+<?php
+/** @var \AHT\Wholesale\Block\Template $block */
+$order = $block->getOrder();
+?>
+
+<div class="admin__page-section-item-content">
+<form method="post" action="<?= $block->getUrl('wholesale/order/updateqty')?>">
+<input type="hidden" name="form_key" value="<?= $block->getFormKey() ?>">
+<input type="hidden" name="order_id" value="<?= $order->getId() ?>">
+<table class="data-table admin__table-primary edit-order-table">
+<thead>
+    <tr class="headings">
+        <th>Product</th>
+        <th>Ordered</th>
+    </tr>
+</thead>
+<tbody>
+<?php
+foreach ($order->getAllItems() as $item) {
+?>
+    <tr>
+        <input type="hidden" name ="item_id[]" value="<?=$item->getItemId()?>"/>
+        <td class="col-product">
+            <div><?=$item->getName()?></div>
+            <div><?=$item->getSku()?></div>
+        </td>
+        <td class="col-status"><input type="number" name ="qty[]" value="<?= number_format($item->getQtyOrdered())?>" min="1"/></td>
+    </tr>
+
+<?php
+}
+?>
+
+</tbody>
+</table>
+<input type="submit" value="Update" class="action-default scalable action-save action-secondary"/>
+</form>
+
+</div>
+

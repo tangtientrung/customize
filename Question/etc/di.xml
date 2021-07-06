@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="question_index_listing_data_source" xsi:type="string">AHT\Question\Ui\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="admin_answer_listing_data_source" xsi:type="string">AHT\Question\Ui\Grid\AdminAnswer</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="others_answer_listing_data_source" xsi:type="string">AHT\Question\Ui\Grid\OthersAnswer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- api -->
+    <preference for="AHT\Question\Api\QuestionRepositoryInterface" type="AHT\Question\Model\QuestionRepository"/>
+    <preference for="AHT\Question\Api\Data\QuestionInterface" type="AHT\Question\Model\Question"/>
+</config>
+
+<!-- <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="question_index_listing_data_source" xsi:type="string">question_index_collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="question_index_collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">question</argument>
+            <argument name="resourceModel" xsi:type="string">AHT\Question\Model\ResourceModel\Question</argument>
+        </arguments>
+    </virtualType>
+</config> -->

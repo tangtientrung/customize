@@ -1,0 +1,118 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+/** @var \Magento\CatalogWidget\Block\Product\ProductsList $block */
+    $mode = 'grid';
+    $type = 'widget-product-grid';
+
+    // $image = 'new_products_content_widget_grid';
+    // $items = $block->getProductCollection()->getItems();
+    // foreach ($block->getAllQuestion() as $_item)
+    // {
+    //     echo $_item->getContent();
+    // }
+    // echo $block->getAllQuestion();
+    // echo $block->getUrl($block->getProductImage(436));
+    // echo $block->getProductImage(436);
+    // foreach ($block->getOthersAnswer(81) as $_item1)
+    // {
+    //     echo $_item1->getContent();
+    // }
+    // echo $this->getUrl($block->getProductUrl(164).".html");
+    // echo $block->getOthersAnswer(89)->getSize();
+?>
+
+    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>">
+        <?php if ($this->getData('title')) : ?>
+            <div class="block-title">
+                <strong><?= $block->escapeHtml(__($this->getData('title'))) ?></strong>
+            </div>
+        <?php endif ?>
+        <div class="block-content">
+            
+            <div class="products-<?= /* @noEscape */ $mode ?> <?= /* @noEscape */ $mode ?>">
+                <ol class="product-items <?= /* @noEscape */ $type ?> question-slick">
+                    <?php foreach ($block->getAllProduct() as $product) : ?>
+                        <li class="product-item">
+                            <a href="<?= $this->getUrl($block->getProductUrl($product->getProductId()).".html")?>" class="product-item-photo">
+                                <span class="product-image-container" style="width:240px;">
+                                    <span class="product-image-wrapper" style="padding-bottom: 125%">
+                                        <img class="product-image-photo" src="<?= $block->escapeUrl($block->getProductImage($product->getProductId())) ?>" max-height="300" max-width="240"/>
+                                    </span>
+                                </span>
+                                <div class="product-item-info">
+                                    <strong class="product-item-name">
+                                        <?= $block->escapeHtml($product->getValue()) ?>
+                                    </strong>
+                                
+                                </div>
+                            </a>
+                                <h3>Câu hỏi</h3>
+                                <ul>
+                                    <?php foreach ($block->getAllQuestion($product->getProductId()) as $_item) : ?>
+                                    <li>
+                                        <?= $_item->getId();?>
+                                        <div>Khách hàng :<?= $block->escapeHtml($_item->getFirstname()) ?></div>
+                                        <div>Câu hỏi :<?= $block->escapeHtml($_item->getContent()) ?></div>
+                                        <?php if($block->getOthersAnswer($_item->getId())->getSize()>0) : ?>
+                                        <h3>Câu trả lời</h3>
+                                        <?php endif ?>
+                                        <ul>
+                                            <?php foreach ($block->getOthersAnswer($_item->getId()) as $_item1) : ?>
+                                                <li>
+                                                <div>Khách hàng :<?= $block->escapeHtml($_item1->getFirstname()) ?></div>
+                                                <div>Câu trả lời :<?= $block->escapeHtml($_item1->getContent()) ?></div>
+                                                </li>
+                                            <?php endforeach ?>
+                                            
+                                        </ul>
+                                    </li>
+                                    <?php endforeach ?>
+                                    
+                                </ul>
+                        </li>
+                    <?php endforeach ?>
+                </ol>
+            </div>
+           
+        </div>
+    </div>
+<style>
+li{
+    list-style: none;
+}
+</style>
+
+
+<script>
+require([
+    'jquery',
+    'slick',
+    'domReady!'
+], function ($) {
+    $(".question-slick").slick({
+        dots: false,
+        infinite: true,
+        prevArrow: false,
+        nextArrow: false,
+        speed: 300,
+        slidesToShow: <?= $this->getData('show') ?>,
+        slidesToScroll:<?= $this->getData('slide') ?>,
+        responsive: [
+                        
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 2,
+                            }
+                        }
+                        
+                    ]
+    });
+    
+});
+</script>

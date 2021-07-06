@@ -1,0 +1,123 @@
+<?php $question = $block->getAllQuestion();
+?>
+<h2><span><?= $block->escapeHtml(__('Customer Questions')) ?></span></h2><br>
+<ol class="items review-items">
+    <?php 
+    if(empty($question->getData()))
+    {
+        echo 'No questions';
+    }
+    else
+    {
+    foreach($question as $q => $val) :?>
+    <li class="item review-item" itemscope="" itemprop="review" itemtype="http://schema.org/Review">
+        <div class="review-title" itemprop="name">
+            <div><?= $val->getQuestion() ?></div>
+            <p class="review-author">
+                    <span class="review-details-label">Question by</span>
+                    <strong class="review-details-value" itemprop="author"><?= $val->getName() ?></strong>
+            </p>
+            <p class="review-date">
+                    <span class="review-details-label">Posted on</span>
+                    <span class="review-details-value" ><?= $val->getCreatedAt() ?></span>
+            </p>
+        </div>
+            <div class="review-ratings">
+               
+            </div>
+            <?php foreach($block->getAnswer($val->getEntityId()) as $a => $val1) :?>
+                <div class="review-content" itemprop="description">
+                    <?= $val1->getAnswer() ?>
+                    <p class="review-author">
+                    <span class="review-details-label">Answer by</span>
+                    <strong class="review-details-value" itemprop="author">Admin</strong>
+                    </p>
+                    <p class="review-date">
+                        <span class="review-details-label">Posted on</span>
+                        <span class="review-details-value" ><?= $val1->getCreatedAt() ?></span>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+    </li>
+    <?php endforeach; }?>
+</ol>
+<?php
+    if($block->isLoggedIn() == true )
+    {
+        ?>
+        <form method='post' class="form-question" action="<?= $block->getUrl('product_question/index/savequestion')?>">
+            <fieldset class="fieldset" data-hasrequired="* Required Fields">
+                <div>
+                    <span>Do you find what you were looking for?</span>
+
+                    <span><button type="button" class="hidden-form" >Hide form</button></span>
+                
+                </div>
+                <input type="hidden" name="product_id" value="<?= $block->getCurrentProduct()->getId();?>"/>
+                <div class="field required js">
+                    <label class="label" for="question">
+                        <span><?= $block->escapeHtml(__('Your question')) ?></span>
+                    </label>
+                    <div class="control">
+                        <textarea name="question" placeholder="<?= $block->escapeHtmlAttr(__('Type your question hear...')) ?>" id="question" class="question" rows="10" cols="100" data-validate="{required:true}"></textarea>
+                    </div>
+                </div>
+                <div class="field js">
+                    <label class="label" for="name">
+                        <span><?= $block->escapeHtml(__('Your name')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input type="text" name="name" class="name" id="name" value="<?=$block->getCustomerName()?>"/>
+                    </div>
+                </div>
+                <div class="field required email " style="display:none">
+                    <label class="label" for="email">
+                        <span><?= $block->escapeHtml(__('Your email')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input type="email" name="email"  id="email" value="<?=$block->getCustomerEmail()?>"/>
+                    </div>
+                </div>
+                <input class="js" type="checkbox" id="is_get_email" name="is_get_email">
+                <label class="js" for="is_get_email">Get notification on email when the answer is ready</label>
+            </fieldset>
+            <input type="submit" class="action primary btn-question js" value="Send the question"/>
+        </form>
+        <?php
+    }
+    else {
+        echo "Vui lòng đăng nhập để đặt câu hỏi";
+    }
+
+?>
+<script type="text/javascript">
+    require(["jquery"],function($) {
+        $(document).ready(function() {
+            $(".hidden-form").click(function(e){
+                if($(this).text()=="Hide form")
+                {
+                    $(".js").hide();
+                    $(".hidden-form").html("Show form");
+                    if ($('#is_get_email').is(":checked")) {
+                        // $("#is_get_email").prop('checked', false);
+                        $(".email").hide();
+                    }
+                }
+                else
+                {
+                    $(".js").show();
+                    $(".hidden-form").html("Hide form");
+                    if ($('#is_get_email').is(":checked")) {
+                        // $("#is_get_email").prop('checked', true);
+                        $(".email").show();
+                    }
+                }
+            });
+            $("#is_get_email").click(function(e){
+                var isCheck = $('#is_get_email').is(":checked");
+                $(".email").toggle();
+            });
+            
+        });
+    });
+</script>

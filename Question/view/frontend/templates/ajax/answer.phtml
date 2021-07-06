@@ -1,0 +1,12 @@
+<?php
+// $productData = $block->getData();
+// $productId = $productData['data']['currentproductid'];
+// $products = $block->getProducts($productId);
+?>
+<form method='post' class="form-answer">
+    <input type="hidden" name="question_id" value="<?= $block->getData('data')['question_id'];?>"/>
+    <input type="hidden" name="product_id" value="<?= $block->getData('data')['product_id'];?>"/>
+    <input type="textarea" class="form-control" id="comment" name="answer"/>
+    <button type="submit" class="btn btn-primary btn-question" >Lưu</button>
+    <button type="button" class="btn btn-primary btn-cancel" >Hủy</button>
+</form>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Ui\Model\Export\ConvertToCsv">
+      <plugin name="AHT_HideOrderPrice_Csv" type="AHT\HideOrderPrice\Model\Export\Csv" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Ui\Model\Export\ConvertToXml">
+      <plugin name="AHT_HideOrderPrice_Xml" type="AHT\HideOrderPrice\Model\Export\Xml" sortOrder="1" disabled="false" />
+    </type>
+</config>

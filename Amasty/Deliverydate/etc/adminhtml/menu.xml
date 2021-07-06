@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Deliverydate::deliverydate" title="Delivery Date" module="Amasty_Deliverydate" parent="Magento_Sales::sales" sortOrder="100" resource="Amasty_Deliverydate::deliverydate"/>
+
+        <add id="Amasty_Deliverydate::deliverydate_holidays" title="Exceptions: Working Days and Holidays" sortOrder="10" module="Amasty_Deliverydate" parent="Amasty_Deliverydate::deliverydate" action="amasty_deliverydate/holidays/" resource="Amasty_Deliverydate::deliverydate_holidays"/>
+
+        <add id="Amasty_Deliverydate::deliverydate_dinterval" title="Exceptions: Date Intervals" sortOrder="20" module="Amasty_Deliverydate" parent="Amasty_Deliverydate::deliverydate" action="amasty_deliverydate/dinterval/" resource="Amasty_Deliverydate::deliverydate_dinterval"/>
+
+        <add id="Amasty_Deliverydate::deliverydate_tinterval" title="Time Intervals" sortOrder="30" module="Amasty_Deliverydate" parent="Amasty_Deliverydate::deliverydate" action="amasty_deliverydate/tinterval/" resource="Amasty_Deliverydate::deliverydate_tinterval"/>
+    </menu>
+</config>

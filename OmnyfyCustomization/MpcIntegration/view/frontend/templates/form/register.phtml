@@ -1,0 +1,33 @@
+<?php
+$fields = $block->getFields();
+if($fields[0]!="") {
+    ?>
+    <fieldset class="fieldset additional_info" data-hasrequired="* Required Fields">
+        <legend class="legend"><span><?= $block->escapeHtml(__('Custom Information')) ?></span></legend>
+        <br>
+        <?php
+        foreach ($fields as $field):
+            $format = explode("_",$field);
+            $format = implode(" ", $format);
+            $label = ucwords($format);
+            ?>
+            <div class="field required">
+                <label class="label" for="<?= $field?>">
+                    <span><?= $block->escapeHtml(__($label)) ?></span>
+                </label>
+                <div class="control">
+                    <select name="<?= $field?>" id="<?= $field?>" title="<?= $block->escapeHtmlAttr(__($label)) ?>" class="input-select"
+                            data-validate="{required:true}">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+            </div>
+        <?php
+        endforeach;
+        ?>
+    </fieldset>
+    <?php
+}
+?>

@@ -1,0 +1,95 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+?>
+<?php
+/** @var $block \Amasty\Deliverydate\Block\Deliverydate\Edit */
+/** @var Magento\Framework\Escaper $escaper */
+?>
+<?php $_order = $block->getOrder() ?>
+<?php $_deliveryDate = $block->getDeliveryDate() ?>
+<form class="form form-edit-account" action="<?= $escaper->escapeHtml($block->getSaveUrl()) ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?= $escaper->escapeHtml(__('* Required Fields')) ?>" autocomplete="off">
+    <fieldset class="fieldset info">
+        <legend class="legend"><span><?= $escaper->escapeHtml(__('Order Information')) ?></span></legend><br>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Order #')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($_order->getRealOrderId()) ?></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($_order->getCustomerEmail()) ?></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Current Delivery Date')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($_deliveryDate->getFormattedDate()) ?></span>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="fieldset deliverydate">
+        <?=$block->getBlockHtml('formkey')?>
+        <legend class="legend"><span><?= $escaper->escapeHtml(__('Delivery Date')) ?></span></legend><br>
+        <div class="field required">
+            <label class="label"><span><?= $escaper->escapeHtml(__('New Delivery Date')) ?></span></label>
+            <div class="control" id="delivfield">
+                <input type="text" class="input-date required-entry" id="amdeliverydate_date"
+                       data-input="amdeliverydate_date"
+                       data-validate="{required:true}"
+                       autocomplete="off"
+                       readonly = "true" />
+            </div>
+            <input type="hidden" name="date" data-amdelivery-js="backend-date" />
+        <div class="field <?php if ($block->isRequiredTimeInterval()):?> required<?php endif;?>">
+            <label class="label"><span><?= $escaper->escapeHtml(__('New Time Interval')) ?></span></label>
+            <div class="control">
+                <?php if ($block->isEnabledTIntervals()):?>
+                    <?php $tIntervals = $block->getTIntervals();?>
+                    <select name="tinterval_id">
+                        <?php foreach ($tIntervals as $intervalIndex => $intervalValue):?>
+                            <option value="<?=$escaper->escapeHtml($intervalIndex) ?>">
+                                <?=$escaper->escapeHtml($intervalValue) ?>
+                            </option>
+                        <?php endforeach;?>
+                    </select>
+                <?php endif;?>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="<?= $escaper->escapeHtml(__('Save')) ?>"><span><?=$escaper->escapeHtml(__('Save'))?></span></button>
+        </div>
+        <?php if ($block->getBackUrl()): ?>
+        <div class="secondary">
+            <a class="action" href="<?=$block->escapeUrl($block->getBackUrl()) ?>"><span><?= $escaper->escapeHtml($block->getBackTitle()) ?></span></a>
+        </div>
+        <?php endif; ?>
+    </div>
+</form>
+<script>
+    require([
+        "jquery",
+        "Amasty_Deliverydate/js/edit/date",
+        "mage/mage",
+        "Amasty_Deliverydate/js/checkout/datepicker"
+    ], function($, amdate){
+        var dataForm = $('#form-validate');
+        dataForm.mage('validation');
+        var amdateObj = amdate(<?= /* @noEscape */  $block->getAmastyCalendarJsonConfig()?>);
+        var config = <?= /* @noEscape */  $block->getCalendarJsonConfig()?>;
+        config.beforeShowDay = amdateObj.restrictDates.bind(amdateObj);
+        $('#amdeliverydate_date').calendar(config);
+        $('#amdeliverydate_date').click(function(event){
+            event.preventDefault();
+            $('.ui-datepicker-trigger').click();
+        });
+    });
+</script>

@@ -1,0 +1,52 @@
+<?php
+    $consents = $block->getConsentAdditional();
+
+    if($consents!="") {
+        ?>
+        <div class="fieldset-wrapper">
+            <div class="fieldset-wrapper-title" tabindex="-1">
+
+                <strong class="title">
+                    <span data-bind="i18n: label">Omnyfy</span>
+                </strong>
+            </div>
+            <?php
+            foreach ($consents as $key => $val):
+                $format = explode("_", $key);
+                $format = implode(" ", $format);
+                $label = ucwords($format);
+                ?>
+                <div class="admin__fieldset -wrapper-content _hide">
+                    <div class="admin__field">
+                <span class="admin__field-label">
+                    <label for="<?= $key ?>">
+                        <span><?= $block->escapeHtml(__($label)) ?></span>
+                    </label>
+                </span>
+                        <span class="admin__field-control">
+                    <select class="admin__control-select" name="<?= $key ?>" id="<?= $key ?>" disabled>
+                        <option data-title="Yes" value="Yes"
+                            <?php
+                            if ($val[0] == "Yes") {
+                                echo "selected";
+                            }
+                            ?>
+                        >Yes</option>
+                        <option data-title="No" value="No"
+                        <?php
+                        if ($val[0] == "No") {
+                            echo "selected";
+                        }
+                        ?>
+                        >No</option>
+                    </select>
+                </span>
+                    </div>
+                </div>
+            <?php
+            endforeach;
+            ?>
+        </div>
+        <?php
+    }
+    ?>

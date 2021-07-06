@@ -1,0 +1,88 @@
+<button id="button1">
+        <span><?= $block->escapeHtml(__('Open Modal')) ?></span>
+    </button>
+<button id="button2">
+        <span><?= $block->escapeHtml(__('Open Magento Login Modal')) ?></span>
+</button>
+
+<button id="button3">
+    <span><?= $block->escapeHtml(__('Open Custom Login Modal')) ?></span>
+</button>
+
+
+<div id="modal1">
+    <div class="modal-body-content">
+        <h2><?= $block->escapeHtml(__('Hello word')) ?></h2>
+    </div>
+</div>
+<div id="modal3">
+        <div class="login-modal" id='authentication-popup-template' data-bind="scope: 'authentication-popup'">
+            <!-- ko template: getTemplate() -->
+            <!-- /ko  -->
+            <script type="text/x-magento-init">
+                {
+                    "#authentication-popup-template": {
+                        "Magento_Ui/js/core/app": {
+                            "components": {
+                                "authentication-popup": {
+                                    "component": "AHT_Modal/js/authentication-popup",
+                                    "template" : "AHT_Modal/authentication-popup",
+                                    "children": {
+                                        "messages":{
+                                            "component":"Magento_Ui/js/view/messages",
+                                            "displayArea":"messages"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        "Magento_Ui/js/modal/modal",
+        'Magento_Customer/js/model/authentication-popup'
+    ], function($, modal, auth) {
+        var popup1 = modal({
+            type: 'popup',
+            responsive: true,
+            title: 'Main title',
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: '',
+                click: function() {
+                    this.closeModal();
+                }
+            }]
+        }, $('#modal1'));
+        var popup3 = modal({
+            type: 'popup',
+            responsive: true,
+            title: 'Login Modal',
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: '',
+                click: function() {
+                    this.closeModal();
+                }
+            }]
+        }, $('#modal3'));
+
+        $("#button1").click(function() {
+            $('#modal1').modal('openModal');
+        });
+        $("#button2").click(function() {
+            auth.showModal();
+            
+        });
+
+        $("#button3").click(function() {
+            $('#modal3').modal('openModal');
+        });
+    })
+</script>

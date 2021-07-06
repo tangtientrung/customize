@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="amdeliverydate_admin_email_template" label="Delivery Date Admin Notification" file="amasty_deliverydate_notification_email.html" type="html" module="Amasty_Deliverydate" area="adminhtml"/>
+    <template id="amdeliverydate_general_email_template" label="Delivery Date Notification" file="amasty_deliverydate_notification_email.html" type="html" module="Amasty_Deliverydate" area="frontend"/>
+    <template id="amdeliverydate_reminder_email_template" label="Delivery Date Reminder" file="amasty_deliverydate_reminder_email.html" type="html" module="Amasty_Deliverydate" area="frontend"/>
+    <template id="amdeliverydate_create_custom_template" label="Delivery Date Custom Template" file="amasty_deliverydate_custom_template.html" type="html" module="Amasty_Deliverydate" area="frontend"/>
+</config>

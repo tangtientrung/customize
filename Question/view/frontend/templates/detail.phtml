@@ -1,0 +1,51 @@
+
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var \Magento\Sales\Block\Order\History $block */
+?>
+<?php $_questions = $block->getQuestion(); ?>
+<?= $block->getChildHtml('info') ?>
+<?php if ($_questions && count($_questions)) : ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Answer of question ')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?= $block->escapeHtml(__('ID')) ?></th>
+                    <th scope="col" class="col date"><?= $block->escapeHtml(__('Answer')) ?></th>
+                    <?= $block->getChildHtml('extra.column.header') ?>
+                    <th scope="col" class="col shipping"><?= $block->escapeHtml(__('Product')) ?></th>
+                    <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
+                    <th scope="col" class="col actions"><?= $block->escapeHtml(__('Action')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_questions as $_question => $_val) : ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Order #')) ?>" class="col id"><?= $_val->getId() ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= $_val->getContent() ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Ship To')) ?>" class="col shipping"><?= $_val->getValue() ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Status')) ?>" class="col status"><?= ($_val->getStatus() == 0) ? 'pending' : 'approved';  ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
+                            <a href="<?= $block->getUrl('question/account/detail/id/'.$_val->getId())?>" class="action view">
+                                <span><?= $block->escapeHtml(__('View Details')) ?></span>
+                            </a>
+                
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else : ?>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('No question.')) ?></span></div>
+<?php endif ?>

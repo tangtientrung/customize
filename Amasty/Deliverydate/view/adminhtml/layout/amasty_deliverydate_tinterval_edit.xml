@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Amasty\Deliverydate\Block\Adminhtml\Tinterval\Edit\Tabs" name="tinterval_tabs">
+                <block class="Amasty\Deliverydate\Block\Adminhtml\Tinterval\Edit\Tab\General" name="amasty_deliverydate_tinterval_edit_tab_general" />
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">amasty_deliverydate_tinterval_edit_tab_general</argument>
+                    <argument name="block" xsi:type="string">amasty_deliverydate_tinterval_edit_tab_general</argument>
+                </action>
+
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Amasty\Deliverydate\Block\Adminhtml\Tinterval\Edit" name="tinterval_edit"/>
+        </referenceContainer>
+    </body>
+</page>

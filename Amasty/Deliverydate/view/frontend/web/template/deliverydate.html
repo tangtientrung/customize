@@ -1,0 +1,19 @@
+<!-- ko if: (isModuleEnabled()) -->
+<div class="fieldset">
+    <!-- ko if: (showGeneralComment()) -->
+        <!-- ko if: (styleMagentoNotice()) -->
+            <div class="messages">
+                <div class="message message-notice notice">
+                    <span class="value" data-bind="html: showGeneralComment()"></span>
+                </div>
+            </div>
+        <!--/ko-->
+        <!-- ko if: (!styleMagentoNotice()) -->
+            <span class="value amasty-deliverydate-comment" data-bind="html: showGeneralComment()"></span>
+        <!--/ko-->
+    <!--/ko-->
+    <each args="data: elems, as: 'element'">
+        <render if="hasTemplate()"/>
+    </each>
+</div>
+<!--/ko-->

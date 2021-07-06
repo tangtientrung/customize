@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="AHT_ProductQuestion::question" title="Product Question" module="AHT_ProductQuestion" sortOrder="30" resource="AHT_ProductQuestion::question"/>
+        <add id="AHT_ProductQuestion::index" title="All product question" module="AHT_ProductQuestion" sortOrder="10" resource="AHT_ProductQuestion::question" action="product_question/index/index" parent="AHT_ProductQuestion::question"/>
+    </menu>
+</config>

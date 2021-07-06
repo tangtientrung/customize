@@ -1,0 +1,30 @@
+<!--@subject Custom Template @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"var order.increment_id":"Order #",
+"var billing.firstname":"Customer Billing Name",
+"var order.getExtensionAttributes().getAmdeliverydateDate()":"Delivery Date",
+"var order.getExtensionAttributes().getAmdeliverydateTime()":"Delivery Time Interval",
+"var order.getExtensionAttributes().getAmdeliverydateComment()":"Delivery Comments"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+{{template config_path="design/email/header_template"}}
+
+<h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Dear {{var billing.firstname}},</h1>
+<p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Awaiting Delivery</p>
+<p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#f9f9f9;">
+    Information:<br/>
+    <strong>Order #</strong>: {{var order.increment_id}}<br/>
+    <strong>Delivery Date</strong>: {{var order.getExtensionAttributes().getAmdeliverydateDate()}}<br/>
+    <strong>Delivery Time Interval</strong>: {{var order.getExtensionAttributes().getAmdeliverydateTime()}}<br/>
+    <strong>Delivery Comments</strong>:<br/>
+    {{var order.getExtensionAttributes().getAmdeliverydateComment()}}</br>
+</p>
+
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,29 @@
+<!--@subject Delivery Date Notification for Order # {{var order.increment_id}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"var order.customer_firstname":"Customer First Name",
+"var order.increment_id":"Order #",
+"var delivery.date":"Delivery Date",
+"var delivery.time":"Delivery Time Interval",
+"var was_date":"Old Date",
+"var was_time":"Old Time",
+"htmlescape var=$delivery.comment":"Delivery Comments"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+{{template config_path="design/email/header_template"}}
+
+<h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Dear {{var order.customer_firstname}},</h1>
+<p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">We are sorry, we were forced to change the Delivery Date information of your order # {{var order.increment_id}}:</p>
+<p style="border:1px solid #E0E0E0; font-size:12px; line-height:16px; margin:0; padding:13px 18px; background:#f9f9f9;">
+    Information:<br/>
+    {{depend was_date}}<strong>Delivery Date</strong>: <s>{{var was_date}}</s> {{var delivery.date}}<br/>{{/depend}}
+    {{depend was_time}}<strong>Delivery Time Interval</strong>: <s>{{var was_time}}</s> {{var delivery.time}}<br/>{{/depend}}
+</p>
+
+{{template config_path="design/email/footer_template"}}

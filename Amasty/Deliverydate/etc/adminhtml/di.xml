@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="Amasty_Deliverydate::GridSearchResult" type="Amasty\Deliverydate\Plugin\Grid\SearchResult" />
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection">
+        <plugin name="Amasty_Deliverydate::GridSearchResult" type="Amasty\Deliverydate\Plugin\Grid\SearchResult" />
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection">
+        <plugin name="Amasty_Deliverydate::GridSearchResult" type="Amasty\Deliverydate\Plugin\Grid\SearchResult" />
+    </type>
+</config>
+

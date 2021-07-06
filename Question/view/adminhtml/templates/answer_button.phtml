@@ -1,0 +1,5 @@
+<?php 
+$str = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$str = explode("/",$str);
+?>
+<a href="<?php echo $block->getUrl("answer/admin/form");?>" class="action-basic">Add new answer</a>

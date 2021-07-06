@@ -1,0 +1,252 @@
+<?php
+    if($block->isLoggedIn() == true )
+    {
+        ?>
+        <form method='post' class="form-question">
+        <input type="hidden" name="url" value="<?= $block->getCurrentUrl();?>"/>
+        <input type="hidden" name="product_id" value="<?= $block->getCurrentProduct()->getId();?>"/>
+            <div class="form-group">
+                <label for="name">Câu hỏi</label>
+                <input type="textarea" class="form-control" id="comment" placeholder="Enter a question" name="question"/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-question" >Submit</button>
+        </form>
+        <?php
+        
+    }
+    else {
+        echo "Vui lòng đăng nhập để đặt câu hỏi";
+    }
+
+?>
+<style>
+    .list-group-item {
+        list-style: none;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">
+                    Recent Questions</h3>
+                <!-- <span class="label label-info">
+                    78</span> -->
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+               
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    require(["jquery"],function($) {
+        $(document).ready(function() {
+            loadQuestion();
+            
+            jQuery(".form-question").submit(function(e){
+                e.preventDefault();
+                var content = jQuery('input[name="question"]').val();
+                var product_id = jQuery('input[name="product_id"]').val();
+                var url = "<?php echo $this->getUrl().'question/ajax/question'?>";
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    showLoader: true,
+                    cache: false,
+                    data: {
+                        content: content,
+                        product_id: product_id
+                    },
+                    success: function(data) {  
+                        loadQuestion();       
+                        alert('Đặt câu hỏi thành công!Vui lòng chờ admin xác nhận câu hỏi của bạn');
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert('Error happens. Try again.');
+                    }
+
+                });
+            });
+            function saveEdit(){
+                jQuery(".form-edit").submit(function(e){
+                    e.preventDefault();
+                    var content = jQuery('input[name="answer"]').val();
+                    var id = jQuery('input[name="id"]').val();
+                    var url = "<?php echo $this->getUrl().'question/ajax/save'?>";
+                    jQuery.ajax({
+                        url: url,
+                        type: 'POST',
+                        showLoader: true,
+                        cache: false,
+                        data: {
+                            content: content,
+                            id: id
+                        },
+                        success: function(data) {  
+                            loadQuestion();       
+                            alert('Sửa thành công');
+                        },
+                        error: function (xhr, status, errorThrown) {
+                            alert('Error happens. Try again.');
+                        }
+
+                    });
+                });
+            }
+            function edit(){
+                jQuery(".btn-edit").click(function(e){
+                e.preventDefault();
+                var id =parseInt( $(this).data('id'));
+                var className = "comment-text-"+id;
+                var content = $(".comment-text-"+id).text();
+
+                var url = "<?php echo $this->getUrl().'question/ajax/edit'?>";
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    showLoader: true,
+                    cache: false,
+                    data: {
+                        id: id,
+                        className: className,
+                        content : content
+                    },
+                    success: function(data) {  
+                        $('.'+className).html(data.output);     
+                        saveEdit();
+                        jQuery(".btn-cancel").click(function(e){
+                            loadQuestion();
+                        });
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert('Error happens. Try again.');
+                    }
+
+                    });
+                });
+            }
+            function answer(){
+                jQuery(".btn-answer").click(function(e){
+                e.preventDefault();
+                var id =parseInt( $(this).data('id'));;
+                var product_id = jQuery('input[name="product_id"]').val();
+                var className = "answer-"+id;
+                var url = "<?php echo $this->getUrl().'question/ajax/answer'?>";
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    showLoader: true,
+                    cache: false,
+                    data: {
+                        id: id,
+                        product_id: product_id
+                    },
+                    success: function(data) {  
+                        $('.'+className).html(data.output);
+                        saveAnswer();
+                        jQuery(".btn-cancel").click(function(e){
+                            loadQuestion();
+                        });
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert('Error happens. Try again.');
+                    }
+
+                    });
+                });
+            }
+            function saveAnswer(){
+                jQuery(".form-answer").submit(function(e){
+                    e.preventDefault();
+                    var product_id = jQuery('input[name="product_id"]').val();
+                    var question_id = jQuery('input[name="question_id"]').val();
+                    var content = jQuery('input[name="answer"]').val();
+                    // alert(content);
+                    var url = "<?php echo $this->getUrl().'question/ajax/save'?>";
+                    jQuery.ajax({
+                        url: url,
+                        type: 'POST',
+                        showLoader: true,
+                        cache: false,
+                        data: {
+                            product_id: product_id,
+                            question_id: question_id,
+                            content: content
+                        },
+                        success: function(data) {  
+                            loadQuestion();       
+                            alert('Thành công');
+                        },
+                        error: function (xhr, status, errorThrown) {
+                            alert('Error happens. Try again.');
+                        }
+
+                    });
+                });
+            }
+            function del(){
+                jQuery(".btn-delete").click(function(e){
+                    if (confirm("Are you sure?")) {
+                        e.preventDefault();
+                    var id =parseInt( $(this).data('id'));
+
+                    var url = "<?php echo $this->getUrl().'question/ajax/delete'?>";
+                    jQuery.ajax({
+                        url: url,
+                        type: 'POST',
+                        showLoader: true,
+                        cache: false,
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {  
+                            alert('Thành công');
+                            loadQuestion();
+                        },
+                        error: function (xhr, status, errorThrown) {
+                            alert('Error happens. Try again.');
+                        }
+
+                        });
+                    }
+                    return false;
+                
+                });
+            }
+            function loadQuestion(){
+
+            	var id = jQuery('input[name="product_id"]').val();
+
+                var url = "<?php echo $this->getUrl().'question/ajax/loadquestion'?>";
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    showLoader: true,
+                    cache: false,
+                    data: {
+                        id: id,
+                    },
+                    success: function(data) {         
+                        // $('.list-group').html("<li>Appended item</li>");
+                        $('.list-group').html(data.output);
+                        edit();
+                        answer();
+                        del();
+                        // console.log(data.output);
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert('Error happens. Try again.');
+                        console.log('Error happens. Try again.');
+                    }
+
+                });
+            }
+        });
+    });
+</script>

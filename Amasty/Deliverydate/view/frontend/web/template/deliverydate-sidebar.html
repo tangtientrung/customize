@@ -1,0 +1,13 @@
+<!-- ko if: (isModuleEnabled()) -->
+<div class="shipping-delivery-date">
+    <!-- ko if: (getDeliveryDate()) -->
+    <!-- ko i18n: 'Delivery Date'--><!-- /ko -->: <span class="value" data-bind="text: getDeliveryDate()"></span><br/>
+    <!--/ko-->
+    <!-- ko if: (getDeliveryTime()) -->
+    <!-- ko i18n: 'Delivery Time'--><!-- /ko -->: <span class="value" data-bind="text: getDeliveryTime()"></span><br/>
+    <!--/ko-->
+    <!-- ko if: (getDeliveryComment()) -->
+    <!-- ko i18n: 'Delivery Comment'--><!-- /ko -->: <span class="value" data-bind="text: getDeliveryComment()"></span><br/>
+    <!--/ko-->
+</div>
+<!--/ko-->

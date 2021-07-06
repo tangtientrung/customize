@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aht" translate="label" sortOrder="10">
+            <label>AHT</label>
+        </tab>
+        <section id="aht" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product question</label>
+            <tab>aht</tab>
+            <resource>AHT_ProductQuestion::question</resource>
+            <group id="product" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Question</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sign_in_to_ask_question" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sign in to ask question</label>
+                    <source_model>AHT\ProductQuestion\Model\Config\Source\IsSignIn</source_model>
+                </field>
+                <field id="email_template" translate="label" sortOrder="30" type="select" showInStore="1" showInDefault="1" >
+                    <label>Email template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <!-- <frontend_model>AHT\ProductQuestion\Block\Adminhtml\System\Config\EmailTemplate</frontend_model> -->
+                    <!-- <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Email template is chosen based on theme fallback when "Default" option is selected.</comment> -->
+                </field>
+                <field id="email_sender" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email sender</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

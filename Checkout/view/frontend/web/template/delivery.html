@@ -1,0 +1,34 @@
+<!--Use 'stepCode' as id attribute-->
+<li data-bind="fadeVisible: isVisible, attr: { id: stepCode }">
+    <div class="step-title" data-bind="i18n: stepTitle" data-role="title"></div>
+        <div id="checkout-step-title"
+             class="step-content"
+             data-role="content">
+            <!-- <div data-bind="if: isLogedIn"> -->
+            <form data-bind="submit: navigateToNextStep"  id="delivery-checkout-form" class="form">
+                <div class="field" name="delivery.date">
+
+                    <label class="label" for="date">
+                        Delivery date
+                    </label>
+                    <br/>
+                    <input class="input-text" type="date" name="date" aria-required="true" aria-invalid="false" id="date">
+                </div>
+                
+                <div class="field" name="delivery.comment">
+                    <label class="label" for="comment">Delivery comment</label><br/>
+                    <textarea name="comment" id="comment" class="comment" rows="10" cols="100"></textarea>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button data-role="opc-continue" type="submit" data-bind="click: navigateToNextStep" class="button action continue primary">
+                            <span><!-- ko i18n: 'Next'--><!-- /ko --></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- </div> -->
+        </div>
+    </li>
+
+    

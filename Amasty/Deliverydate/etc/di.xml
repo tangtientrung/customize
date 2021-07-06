@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amdeliverydate_holidays_listing_data_source" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Holidays\Grid\Collection</item>
+                <item name="amdeliverydate_dinterval_listing_data_source" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Dinterval\Grid\Collection</item>
+                <item name="amdeliverydate_tinterval_listing_data_source" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Tinterval\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Model\OrderRepository">
+        <plugin sortOrder="1" name="amastyDeliverydateOrderRepository" type="\Amasty\Deliverydate\Plugin\Order\OrderRepositoryPlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin sortOrder="1" name="amastyDeliverydateOrderSender" type="Amasty\Deliverydate\Plugin\Order\OrderSenderPlugin"/>
+    </type>
+    <virtualType name="Amasty\Deliverydate\Model\ResourceModel\Holidays\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amdeliverydate_holidays</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Holidays</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Deliverydate\Model\ResourceModel\Dinterval\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amdeliverydate_dinterval</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Dinterval</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Deliverydate\Model\ResourceModel\Tinterval\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_amdeliverydate_tinterval</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Deliverydate\Model\ResourceModel\Tinterval</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\Deliverydate\Ui\Component\Listing\Column\MonthWithEach" type="Amasty\Deliverydate\Ui\Component\Listing\Column\Month">
+        <arguments>
+            <argument name="eachMonthAvailable" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="save-in-quote" type="Amasty\Deliverydate\Plugin\Checkout\ShippingInformationManagement"/>
+    </type>
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+        <plugin name="Amasty_Delivarydate::OrderEmail" type="Amasty\Deliverydate\Plugin\Order\Email" />
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="AmdeliverydateSaveOrder" type="Amasty\Deliverydate\Plugin\Order\OrderSave"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Pdf\Invoice">
+        <plugin name="Amasty_Delivarydate::PrintInvoice" type="Amasty\Deliverydate\Plugin\Order\InvoicePdf" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Pdf\Shipment">
+        <plugin name="Amasty_Delivarydate::PrintShipment" type="Amasty\Deliverydate\Plugin\Order\ShipmentPdf" />
+    </type>
+</config>

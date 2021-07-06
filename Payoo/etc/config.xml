@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <payoo>
+                <active>1</active>
+                <model>AHT\Payoo\Model\Payment\Payoo</model>
+                <payment_url></payment_url>
+                <business_username></business_username>
+                <shop_id></shop_id>
+                <shop_title></shop_title>
+                <checksum_key></checksum_key>
+                <api_username></api_username>
+                <api_password></api_password>
+                <api_signature></api_signature>
+                <website_url></website_url>
+                <business_api_url></business_api_url>
+                <order_ship_date></order_ship_date>
+                <payment_validity_time></payment_validity_time>
+            </payoo>
+        </payment>
+    </default>
+</config>

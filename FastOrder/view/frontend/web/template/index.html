@@ -1,0 +1,69 @@
+<div class="component-wrapper">
+    <div class="field">
+        <div class="control">
+            <input name="customername"
+                   id="customername"
+                   type="text"
+                   class="input-text"
+                   data-bind="value: search, valueUpdate : 'afterkeydown', event: {keyup: eventSearch},hasFocus: isSelected">
+        </div>
+    </div>
+    
+    <div data-bind="foreach: resultSearch,visible: isSelected && resultSearch().length" class="search-result" >
+        <div class="product">
+            <div class="search-result__left">
+                <img src='' data-bind="attr: {src: image_url}" alt="img product" width="100px">
+            </div>
+            <div class="search-result__right">
+                <div data-bind="text: name"></div>
+                <div>SKU#: <span data-bind="text: sku"></span></div>
+                <div data-bind="text: price"></div>
+            </div>
+            <div class="search-result__check">
+                <input type="checkbox" data-bind="checked: isCheck , event: { change: $parent.checkProduct }">
+            </div>
+        </div>
+    </div>
+    <!-- data-bind="visible:resultSearch()length||productCart().length " -->
+    <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">SKU</th>
+            <th scope="col">Product</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: productCart ">
+            <tr >
+                <td data-bind="text: name"></td>
+                <td>
+                    <img src='' data-bind="attr: {src: image_url}" alt="img product" width="100px">
+                    <div>
+                        <span data-bind="text: name"></span>
+                    </div>
+                    <div>
+                        <span data-bind="text: price"></span>
+                    </div>
+                </td>
+                <td>
+                    <span><button data-bind="click: qtyUp">+</button></span>
+                    <span><input type="number" disabled data-bind="value: qty"></span>
+                    <span><button data-bind="click: qtyDown">-</button></span>
+                    <span><button data-bind='click: $parent.removeLine'>Remove</button></span>
+                </td>
+                <td data-bind="text: total"></td>
+            </tr>
+            
+        </tbody>
+        <tr>
+            <td></td>
+            <td>Filled line number<div data-bind="text: totalFill"></div></td>
+            <td>Total qty<div data-bind="text: totalQty"></div></td>
+            <td>Sub total<div data-bind="text: subTotal"></div></td>
+        </tr>
+      </table>
+      <button type="button" data-bind="click: addCart,visible: productCart().length">Add to cart</button>
+    
+</div>
+ 

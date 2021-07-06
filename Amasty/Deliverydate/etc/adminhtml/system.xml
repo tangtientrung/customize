@@ -1,0 +1,454 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amdeliverydate" translate="label" type="text" sortOrder="40504" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Delivery Date</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Deliverydate::amasty_deliverydate</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disabled_days" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Delivery On</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="only_workdays" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude disabled delivery days from Minimal and Maximal Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="min_days" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimal Delivery Interval</label>
+                    <comment><![CDATA[In days. Set to 0 to allow same day delivery.]]></comment>
+                </field>
+                <field id="min_days_attr" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimal Delivery by Product</label>
+                    <comment><![CDATA[Product attribute code (type = Price).]]></comment>
+                </field>
+                <field id="min_days_exclude" translate="label comment" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Weekend, Holiday and Delivery Interval from Minimal Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Minimal Delivery cann't be weekend, holiday and delivery interval .]]></comment>
+                </field>
+                <field id="max_days" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximal Delivery Interval</label>
+                    <comment><![CDATA[In days]]></comment>
+                </field>
+                <field id="enabled_same_day" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled `Disable Same Day Delivery After`</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="same_day" translate="label" type="time" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Same Day Delivery After</label>
+                    <depends>
+                        <field id="enabled_same_day">1</field>
+                    </depends>
+                </field>
+                <field id="enabled_next_day" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled `Disable Next Day Delivery After`</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="next_day" translate="label" type="time" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Next Day Delivery After</label>
+                    <depends>
+                        <field id="enabled_next_day">1</field>
+                    </depends>
+                </field>
+                <field id="offset" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time Offset</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Offset</source_model>
+                    <comment><![CDATA[Modify this only if you're getting incorrect time values.]]></comment>
+                </field>
+                <field id="comment" translate="label comment" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery Comment</label>
+                    <comment><![CDATA[Visible for customers on checkout. HTML tags allowed.]]></comment>
+                </field>
+                <field id="comment_style" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Style of the Delivery Comment</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Style</source_model>
+                </field>
+                <field id="notification_sender" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="quota" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Quota</label>
+                <field id="quota_type" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota Type</label>
+                    <options>
+                        <option label="Unlimited">0</option>
+                        <option label="Per Day">day</option>
+                        <option label="Per Day of the Week">week_day</option>
+                    </options>
+                </field>
+                <field id="per_day" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota Per Day</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">day</field>
+                    </depends>
+                </field>
+                <field id="per1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Monday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per2" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Tuesday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per3" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Wednesday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per4" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Thursday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per5" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Friday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per6" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Saturday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+                <field id="per7" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quota per Sunday</label>
+                    <comment><![CDATA[Maximum number of deliveries per day. Set 0 to unlimited.]]></comment>
+                    <depends>
+                        <field id="quota_type">week_day</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="date_field" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Delivery Date</label>
+                <field id="format" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Date Format</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\DateFormat</source_model>
+                    <comment><![CDATA[Format of date for outputting values]]></comment>
+                </field>
+                <field id="required" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enabled_default" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Default Value</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Will preselect value on the frontend (if date is not disabled).]]></comment>
+                </field>
+                <field id="default" translate="label comment" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Value</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment><![CDATA[0 - same day or first possibility when using 'Delivery by Product', 1 - next day etc.]]></comment>
+                    <depends>
+                        <field id="enabled_default">1</field>
+                    </depends>
+                </field>
+                <field id="include" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include Into</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\IncludeInto</source_model>
+                </field>
+                <field id="show" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display On</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Show</source_model>
+                </field>
+                <field id="note" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Field Note</label>
+                    <comment><![CDATA[Visible on checkout below the date field.]]></comment>
+                </field>
+                <field id="enabled_customer_groups" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Customer Groups Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="customer_groups" translate="label" type="multiselect" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Groups</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Group</source_model>
+                    <depends>
+                        <field id="enabled_customer_groups">1</field>
+                    </depends>
+                </field>
+                <field id="enabled_carriers" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Shipping Methods Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="carriers" translate="label" type="multiselect" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Methods</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Carriers</source_model>
+                    <depends>
+                        <field id="enabled_carriers">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="editable" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Delivery Date Edit</label>
+                <field id="is_editable" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow reschedule Delivery Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allow customer to edit DD once an order is placed</comment>
+                </field>
+                <field id="rule_activation" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rule activation</label>
+                    <options>
+                        <option label="Date and Order Status">both</option>
+                        <option label="Date or Order Status">one_of</option>
+                        <option label="Order Status">status</option>
+                        <option label="Date">date</option>
+                    </options>
+                    <depends>
+                        <field id="is_editable">1</field>
+                    </depends>
+                    <comment><![CDATA[Define rule which allow/disallow delivery date editing by customer]]></comment>
+                </field>
+                <field id="order_status" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order status can be rescheduled</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\OrderStatus</source_model>
+                    <depends>
+                        <field id="is_editable">1</field>
+                        <field id="rule_activation" negative="1">date</field>
+                    </depends>
+                </field>
+                <field id="period" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Lockdown period</label>
+                    <options>
+                        <option label="1 day">1</option>
+                        <option label="2 days">2</option>
+                        <option label="3 days">3</option>
+                        <option label="4 days">4</option>
+                        <option label="5 days">5</option>
+                        <option label="6 days">6</option>
+                        <option label="7 days">7</option>
+                        <option label="14 days">14</option>
+                        <option label="30 days">30</option>
+                    </options>
+                    <depends>
+                        <field id="is_editable">1</field>
+                        <field id="rule_activation" negative="1">status</field>
+                    </depends>
+                    <comment><![CDATA[Is time interval before order delivery date. When lockdown period is running - customer cannot edit delivery date]]></comment>
+                </field>
+                <field id="email" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recipient Email Address</label>
+                    <comment><![CDATA[Recipient email address for notifications when customer changes Delivery Date. Comma separated.]]></comment>
+                    <depends>
+                        <field id="enabled_reminder">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="time_field" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Delivery Time</label>
+                <field id="enabled_time" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Delivery Time</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Amasty\Deliverydate\Block\Adminhtml\System\Config\DeliveryTime</frontend_model>
+                </field>
+                <field id="required" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_time">1</field>
+                    </depends>
+                </field>
+                <field id="enabled_default" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Default Value</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Will preselect value on the frontend (if time is not disabled).]]></comment>
+                </field>
+                <field id="default" translate="label comment" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Value</label>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                    <comment><![CDATA[Time Interval sorted by Time Interval ID.]]></comment>
+                    <depends>
+                        <field id="enabled_default">1</field>
+                    </depends>
+                </field>
+                <field id="include" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include Into</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\IncludeInto</source_model>
+                </field>
+                <field id="show" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display On</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Show</source_model>
+                </field>
+                <field id="note" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Field Note</label>
+                    <comment><![CDATA[Visible on checkout below the date field.]]></comment>
+                </field>
+                <field id="enabled_customer_groups" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Customer Groups Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_time">1</field>
+                    </depends>
+                </field>
+                <field id="customer_groups" translate="label" type="multiselect" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Groups</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Group</source_model>
+                    <depends>
+                        <field id="enabled_customer_groups">1</field>
+                    </depends>
+                </field>
+                <field id="enabled_carriers" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Shipping Methods Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_time">1</field>
+                    </depends>
+                </field>
+                <field id="carriers" translate="label" type="multiselect" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Methods</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Carriers</source_model>
+                    <depends>
+                        <field id="enabled_carriers">1</field>
+                    </depends>
+                </field>
+                <field id="offset_disabled" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time Interval Offset for Same Day Delivery</label>
+                    <comment><![CDATA[Minutes. Time between the current time and the first time that can be selected.]]></comment>
+                </field>
+                <field id="match_interval" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Current Time Interval</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Disable time interval if current time with offset are included into this time interval.]]></comment>
+                </field>
+            </group>
+
+            <group id="comment_field" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Comments Field</label>
+                <field id="enabled_comment" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Comments Field</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="required" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Required</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_comment">1</field>
+                    </depends>
+                </field>
+                <field id="maxlength" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Limit for Comment</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[In symbols. Set zero if it is not needed.]]></comment>
+                </field>
+                <field id="include" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include Into</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\IncludeInto</source_model>
+                </field>
+                <field id="show" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display On</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Show</source_model>
+                </field>
+                <field id="note" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Field Note</label>
+                    <comment><![CDATA[Visible on checkout below the date field.]]></comment>
+                </field>
+                <field id="enabled_customer_groups" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Customer Groups Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_comment">1</field>
+                    </depends>
+                </field>
+                <field id="customer_groups" translate="label" type="multiselect" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Groups</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Group</source_model>
+                    <depends>
+                        <field id="enabled_customer_groups">1</field>
+                    </depends>
+                </field>
+                <field id="enabled_carriers" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show For Selected Shipping Methods Only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled_comment">1</field>
+                    </depends>
+                </field>
+                <field id="carriers" translate="label" type="multiselect" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Methods</label>
+                    <source_model>Amasty\Deliverydate\Model\Config\Source\Carriers</source_model>
+                    <depends>
+                        <field id="enabled_carriers">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="reminder" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Reminder</label>
+                <field id="enabled_reminder" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="recipient_email" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recipient Email Address</label>
+                    <comment><![CDATA[Comma separated.]]></comment>
+                    <depends>
+                        <field id="enabled_reminder">1</field>
+                    </depends>
+                </field>
+                <field id="reminder_sender" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="enabled_reminder">1</field>
+                    </depends>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="enabled_reminder">1</field>
+                    </depends>
+                </field>
+                <field id="time_before" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time Before</label>
+                    <comment><![CDATA[In hours.]]></comment>
+                    <depends>
+                        <field id="enabled_reminder">1</field>
+                    </depends>
+                </field>
+            </group>
+
+
+        </section>
+    </system>
+</config>
+
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="page_calendar"/>
+    <head>
+        <css src="Amasty_Deliverydate::css/checkout.css"/>
+    </head>
+    <body>
+        <referenceBlock name="checkout.root" >
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="amasty-delivery-date" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Amasty_Deliverydate/js/checkout/deliverydate</item>
+                                                                    <item name="displayArea" xsi:type="string">amasty-delivery-date</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Amasty_Deliverydate/deliverydate</item>
+                                                                    </item>
+                                                                    <item name="children" xsi:type="array">
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-information" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="ship-to" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="amasty-delivery-date-sidebar" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Amasty_Deliverydate/js/checkout/sidebar</item>
+                                                            <item name="displayArea" xsi:type="string">amasty-delivery-date-sidebar</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Amasty_Deliverydate/deliverydate-sidebar</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

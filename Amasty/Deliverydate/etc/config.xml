@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Deliverydate
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amdeliverydate>
+            <general>
+                <enabled>1</enabled>
+                <disabled_days>0</disabled_days>
+                <only_workdays>0</only_workdays>
+                <min_days>0</min_days>
+                <min_days_attr></min_days_attr>
+                <max_days></max_days>
+                <enabled_same_day>0</enabled_same_day>
+                <same_day>00,00,00</same_day>
+                <enabled_next_day>0</enabled_next_day>
+                <next_day>00,00,00</next_day>
+                <offset>0</offset>
+                <comment></comment>
+                <comment_style>as_is</comment_style>
+                <format>Y/M/D</format>
+                <notification_sender>general</notification_sender>
+                <email_template></email_template>
+            </general>
+            <quota>
+                <tinterval_quota>0</tinterval_quota>
+                <quota_type>0</quota_type>
+                <per_day>0</per_day>
+                <per1>0</per1>
+                <per2>0</per2>
+                <per3>0</per3>
+                <per4>0</per4>
+                <per5>0</per5>
+                <per6>0</per6>
+                <per7>0</per7>
+            </quota>
+            <date_field>
+                <format>yyyy-MM-dd</format>
+                <required>0</required>
+                <enabled_default>0</enabled_default>
+                <default>0</default>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+                <enabled_customer_groups>0</enabled_customer_groups>
+                <customer_groups></customer_groups>
+                <enabled_carriers>0</enabled_carriers>
+                <carriers></carriers>
+            </date_field>
+            <editable>
+                <is_editable>0</is_editable>
+                <rule_activation>both</rule_activation>
+                <order_status></order_status>
+                <period>3</period>
+                <email></email>
+            </editable>
+            <time_field>
+                <enabled_time>1</enabled_time>
+                <required>0</required>
+                <enabled_default>0</enabled_default>
+                <default>1</default>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+                <enabled_customer_groups>0</enabled_customer_groups>
+                <customer_groups></customer_groups>
+                <enabled_carriers>0</enabled_carriers>
+                <carriers></carriers>
+                <offset_disabled>0</offset_disabled>
+                <match_interval>0</match_interval>
+            </time_field>
+            <comment_field>
+                <enabled_comment>1</enabled_comment>
+                <required>0</required>
+                <maxlength>0</maxlength>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+                <enabled_customer_groups>0</enabled_customer_groups>
+                <customer_groups></customer_groups>
+                <enabled_carriers>0</enabled_carriers>
+                <carriers></carriers>
+            </comment_field>
+            <reminder>
+                <enabled_reminder>0</enabled_reminder>
+                <recipient_email></recipient_email>
+                <reminder_sender>general</reminder_sender>
+                <email_template></email_template>
+                <time_before></time_before>
+            </reminder>
+        </amdeliverydate>
+    </default>
+</config>

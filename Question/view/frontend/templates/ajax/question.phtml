@@ -1,0 +1,286 @@
+<ul class="list-group">
+    <?php 
+        foreach($block->getAllQuestion() as $key => $val){
+
+            //bat user
+            if($val->getUserId() == $block->getUserId())
+            {
+            //bat san pham
+            //$block->getData('data') dang luu gia tri product id ben controller truyen sang
+            if($val->getProductId() == $block->getData('data'))
+            {
+            
+    ?>
+        <li class="list-group-item ">
+            <div class="row">
+                <div class="col-xs-2 col-md-1">
+                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                <div class="col-xs-10 col-md-11">
+                    <div>
+                        <a href="">
+                            <?php echo $val->getFirstname().' '.$val->getLastname();?></a>
+                        <!-- <div class="mic-info">
+                            By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                        </div> -->
+                    </div>
+                    <div class="comment-text-<?php echo $val->getId(); ?>">
+                        <?php echo $val->getContent();?> 
+                    </div>
+                    <div class="action">
+                        <a type="button" class="btn btn-primary btn-xs btn-answer" data-id="<?php echo $val->getId();?>" title="Answer">
+                            <span class="glyphicon glyphicon-pencil">Answer</span>
+                        </a>
+                        <a type="button" class="btn btn-success btn-xs btn-edit" title="Edit" data-id="<?php echo $val->getId();?>">
+                            <span class="glyphicon glyphicon-ok">Edit</span>
+                        </a>
+                        <a type="button" class="btn btn-danger btn-xs btn-delete" title="Delete" data-id="<?php echo $val->getId();?>">
+                            <span class="glyphicon glyphicon-trash">Delete</span>
+                        </a>
+                    </div>
+                    <div class="answer-<?php echo $val->getId(); ?>">
+                    
+                    </div>
+                    
+                </div>
+            </div>
+            <?php
+            //admin answer
+            if (sizeof($block->getAdminAnswer($val->getId()))!=0)
+            {
+                ?>
+                    <!-- level 2 -->
+                    <h3>Admin answer</h3>
+                    <ul class="list-group">
+                <?php
+                    foreach($block->getAdminAnswer($val->getId()) as $key1 => $val1){
+                        ?>
+                        <li class="list-group-item ">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-1">
+                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                <div class="col-xs-10 col-md-11">
+                                    <div class="comment-text-<?php echo $val1->getId(); ?>" id="<?php echo $val->getId(); ?>">
+                                    <?php echo $val1->getContent();?> 
+                                    </div>
+                                    <div class="action">
+                                        <a type="button" class="btn btn-primary btn-xs btn-answer" data-id="<?php echo $val1->getId();?>" title="Answer">
+                                            <span class="glyphicon glyphicon-pencil">Answer</span>
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="answer-<?php echo $val1->getId(); ?>">
+                                    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <?php
+                            //admin answer
+                            if (sizeof($block->getAdminAnswer($val1->getId()))!=0)
+                            {
+                                ?>
+                                    <!-- level 3 -->
+                                    <h3>Admin answer</h3>
+                                    <ul class="list-group">
+                                <?php
+                                    foreach($block->getAdminAnswer($val1->getId()) as $key2 => $val2){
+                                        ?>
+                                        <li class="list-group-item ">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div class="comment-text-<?php echo $val2->getId(); ?>">
+                                                    <?php echo $val2->getContent();?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                ?>
+                                    </ul>
+                                <?php
+                            
+                            }
+
+                            //others answer
+                            if (sizeof($block->getOthersAnswer($val1->getId()))!=0)
+                            {
+                                ?>
+                                    <!-- level 3 -->
+                                    <h3>Others answer</h3>
+                                    <ul class="list-group">
+                                <?php
+                                    foreach($block->getOthersAnswer($val1->getId()) as $key2 => $val2){
+                                        ?>
+                                        <li class="list-group-item ">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div>
+                                                        <a href="">
+                                                            <?php echo $val2->getFirstname().' '.$val2->getLastname();?></a>
+                                                    </div>
+                                                    <div class="comment-text-<?php echo $val2->getId(); ?>">
+                                                    <?php echo $val2->getContent();?> 
+                                                    </div>
+                                                    <div class="action">
+                                                        <a type="button" class="btn btn-success btn-xs btn-edit" title="Edit" data-id="<?php echo $val2->getId();?>">
+                                                            <span class="glyphicon glyphicon-ok">Edit</span>
+                                                        </a>
+                                                        <a type="button" class="btn btn-danger btn-xs btn-delete" title="Delete" data-id="<?php echo $val2->getId();?>">
+                                                            <span class="glyphicon glyphicon-trash">Delete</span>
+                                                        </a>
+                                                    </div>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                ?>
+                                    </ul>
+                                <?php
+                            
+                            }
+                            ?>
+                        </li>
+                        <?php
+                    }
+                ?>
+                    </ul>
+                <?php
+            
+            }
+            //others answer
+            if (sizeof($block->getOthersAnswer($val->getId()))!=0)
+            {
+                ?>
+                    <!-- level 2 -->
+                    <h3>Others answer</h3>
+                    <ul class="list-group">
+                <?php
+                    foreach($block->getOthersAnswer($val->getId()) as $key1 => $val1){
+                        ?>
+                        <li class="list-group-item ">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-1">
+                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                <div class="col-xs-10 col-md-11">
+                                    <div>
+                                        <a href="">
+                                            <?php echo $val1->getFirstname().' '.$val1->getLastname();?></a>
+                                    </div>
+                                    <div class="comment-text-<?php echo $val1->getId(); ?>">
+                                    <?php echo $val1->getContent();?> 
+                                    </div>
+                                    <div class="action">
+                                        <a type="button" class="btn btn-primary btn-xs btn-answer" data-id="<?php echo $val1->getId();?>" title="Answer">
+                                            <span class="glyphicon glyphicon-pencil">Answer</span>
+                                        </a>
+                                        <a type="button" class="btn btn-success btn-xs btn-edit" title="Edit" data-id="<?php echo $val1->getId();?>">
+                                            <span class="glyphicon glyphicon-ok">Edit</span>
+                                        </a>
+                                        <a type="button" class="btn btn-danger btn-xs btn-delete" title="Delete" data-id="<?php echo $val1->getId();?>">
+                                            <span class="glyphicon glyphicon-trash">Delete</span>
+                                        </a>
+                                    </div>
+                                    <div class="answer-<?php echo $val1->getId(); ?>">
+                                    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <?php
+                            //admin answer
+                            if (sizeof($block->getAdminAnswer($val1->getId()))!=0)
+                            {
+                                ?>
+                                    <!-- level 3 -->
+                                    <h3>Admin answer</h3>
+                                    <ul class="list-group">
+                                <?php
+                                    foreach($block->getAdminAnswer($val1->getId()) as $key2 => $val2){
+                                        ?>
+                                        <li class="list-group-item ">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div class="comment-text-<?php echo $val2->getId(); ?>">
+                                                    <?php echo $val2->getContent();?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                ?>
+                                    </ul>
+                                <?php
+                            
+                            }
+
+                            //others answer
+                            if (sizeof($block->getOthersAnswer($val1->getId()))!=0)
+                            {
+                                ?>
+                                    <!-- level 3 -->
+                                    <h3>Others answer</h3>
+                                    <ul class="list-group">
+                                <?php
+                                    foreach($block->getOthersAnswer($val1->getId()) as $key2 => $val2){
+                                        ?>
+                                        <li class="list-group-item ">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <!-- <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div> -->
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div>
+                                                        <a href="">
+                                                            <?php echo $val2->getFirstname().' '.$val2->getLastname();?></a>
+                                                    </div>
+                                                    <div class="comment-text-<?php echo $val2->getId(); ?>">
+                                                    <?php echo $val2->getContent();?> 
+                                                    </div>
+                                                    <div class="action">
+                                                        <a type="button" class="btn btn-success btn-xs btn-edit" title="Edit" data-id="<?php echo $val2->getId();?>">
+                                                            <span class="glyphicon glyphicon-ok">Edit</span>
+                                                        </a>
+                                                        <a type="button" class="btn btn-danger btn-xs btn-delete" title="Delete" data-id="<?php echo $val2->getId();?>">
+                                                            <span class="glyphicon glyphicon-trash">Delete</span>
+                                                        </a>
+                                                    </div>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                ?>
+                                    </ul>
+                                <?php
+                            
+                            }
+                            ?>
+                        </li>
+                        <?php
+                    }
+                ?>
+                    </ul>
+                <?php
+            
+            }
+            
+            ?>
+        </li>
+
+        
+        
+    <?php
+    
+        }
+            }
+            
+        }
+    ?>
+                
+</ul>

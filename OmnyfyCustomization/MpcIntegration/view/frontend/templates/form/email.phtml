@@ -1,0 +1,86 @@
+<div class="email-container">
+    <div class="block block-customer-email">
+        <div class="block-title">
+            <strong id="block-customer-email-heading" role="heading" aria-level="2">Registered Customers</strong>
+        </div>
+        <div class="block-content" aria-labelledby="block-customer-email-heading">
+            <form class="form form-email" method="post" id="email-form" action="<?= $block->getUrl('omnyfy_mpci/registration/updateEmail') ?>">
+                <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+                <fieldset class="fieldset email" data-hasrequired="* Required Fields">
+                    <div class="field note">If you have an account, sign in with your phone number.</div>
+                    <div class="field verification_code required">
+                        <label class="label" for="customer_email"><span><?= __("Customer email") ?></span></label>
+                        <div class="control">
+                            <input name="customer_email" id="customer_email" type="text" class="input-text"
+                                   title="<?= __("Customer email") ?>" data-validate="{required:true}" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button type="submit" class="action primary submit-email" name="sumbit">
+                                <span><?= __("Submit") ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    require([
+    'Magento_Ui/js/modal/alert',
+    'jquery'
+], function(alert, $) {
+        $(document).ready(function() {
+            // alert('ok');
+            $(".submit-email").click(function(e){
+                e.preventDefault();
+                var email = $('input[name="customer_email"]').val();
+                var url = "<?php echo $this->getUrl().'omnyfy_mpci/registration/validateEmail'?>";
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    showLoader: true,
+                    cache: false,
+                    data: {
+                        email: email
+                    },
+                    success: function(data) {
+                        if(data == 'exit')
+                        {
+                            
+                            alert({
+                                title: "<?= __('Error') ?>",
+                                content: 'Email exit!!!',
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                        }
+                        else {
+                            $("#email-form").submit();
+                        }
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        alert({
+                                title: "<?= __('Error') ?>",
+                                content: "<?= __('Error happens. Try again.') ?>",
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                    }
+
+                });
+                
+                
+            });
+            
+        });
+    });
+    
+
+</script>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="payoo" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payoo</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="model" translate="label" type="hidden" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                </field>
+                <field id="payment_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment url</label>
+                </field>
+                <field id="business_username" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Business username</label>
+                </field>
+                <field id="shop_id" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shop id</label>
+                </field>
+                <field id="shop_title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shop title</label>
+                </field>
+                <field id="checksum_key" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checksum key</label>
+                </field>
+                <field id="api_username" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API username</label>
+                </field>
+                <field id="api_password" translate="label" type="password" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API password</label>
+                </field>
+                <field id="api_signature" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API signature</label>
+                </field>
+                <field id="website_url" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Website url</label>
+                </field>
+                <field id="business_api_url" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Business api url</label>
+                </field>
+                <field id="order_ship_date" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order ship date</label>
+                </field>
+                <field id="payment_validity_time" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment validity time</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
